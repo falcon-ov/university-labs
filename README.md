@@ -13,7 +13,7 @@ git clone --no-checkout https://github.com/USERNAME/university-labs.git
 cd university-labs
 
 git sparse-checkout init --cone
-git sparse-checkout set year-3-design-soft
+git sparse-checkout set year-3-design-soft/design-soft-lab1
 ```
 
 В рабочей директории будет **только эта лабораторная**.
