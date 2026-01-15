@@ -1,12 +1,12 @@
-## Как скачать только одну лабораторную или курс
+## How to download only one lab or course
 
-Репозиторий содержит **все лабораторные работы**, но вы **не обязаны клонировать всё целиком**. Ниже несколько способов.
+The repository contains **all lab works**, but you **don’t have to clone everything**. Below are several ways.
 
 ---
 
-### Скачать одну лабораторную (через sparse-checkout)
+### Download one lab (using sparse-checkout)
 
-Подходит, если нужна **одна конкретная папка**.
+Suitable if you need **one specific folder**.
 
 ```bash
 git clone --no-checkout https://github.com/falcon-ov/university-labs.git
@@ -14,15 +14,17 @@ cd university-labs
 
 git sparse-checkout init --cone
 git sparse-checkout set year-3-design-soft/design-soft-lab1
+
+git checkout
 ```
 
-В рабочей директории будет **только эта лабораторная**.
+The working directory will contain **only this lab**.
 
 ---
 
-### 🔹 Вариант 2: Скачать все лабораторные одного курса
+### Download all labs of one course
 
-Например, все лабораторки по Java второго года:
+For example, all Java labs of the second year:
 
 ```bash
 git clone --no-checkout https://github.com/falcon-ov/university-labs.git
@@ -30,16 +32,18 @@ cd university-labs
 
 git sparse-checkout init --cone
 git sparse-checkout set year-3-design-soft
+
+git checkout
 ```
 
-* `sparse-checkout` — официальный механизм Git
-* Можно в любой момент сменить папку:
+* `sparse-checkout` — the official Git mechanism
+* You can change the folder at any time:
 
 ```bash
 git sparse-checkout set year-3-ai
 ```
 
-* Чтобы вернуть все файлы:
+* To restore all files:
 
 ```bash
 git sparse-checkout disable
