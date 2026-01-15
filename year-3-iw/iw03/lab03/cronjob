@@ -1,0 +1,8 @@
+# Установим PATH для cron
+PATH=/usr/local/bin:/usr/bin:/bin
+
+# Ежедневно в 6:00 AM: MDL to EUR за предыдущий день (тест: каждую минуту)
+* * * * * python3 /app/currency_exchange_rate.py MDL EUR $(date -d "yesterday" +\%Y-\%m-\%d) >> /var/log/cron.log 2>&1
+
+# Еженедельно в пятницу в 17:00: MDL to USD за предыдущую неделю (тест: каждую минуту)
+* * * * * for day in $(seq 1 7); do date=$(date -d "$day days ago" +\%Y-\%m-\%d); python3 /app/currency_exchange_rate.py MDL USD $date >> /var/log/cron.log 2>&1; done

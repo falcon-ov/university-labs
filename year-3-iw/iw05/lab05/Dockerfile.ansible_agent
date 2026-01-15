@@ -1,0 +1,58 @@
+FROM ubuntu:22.04
+
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    openssh-server \
+    python3 \
+    python3-pip \
+    git \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Ansible
+RUN pip3 install ansible
+
+# Create jenkins user
+RUN useradd -m -s /bin/bash jenkins && \
+    echo "jenkins:jenkins" | chpasswd && \
+    mkdir -p /home/jenkins/.ssh && \
+    chown -R jenkins:jenkins /home/jenkins/.ssh && \
+    chmod 700 /home/jenkins/.ssh
+
+# Configure SSH
+RUN mkdir /var/run/sshd && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config && \
+    sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# Copy public key for jenkins user
+COPY secrets/ansible_agent_ssh_key.pub /home/jenkins/.ssh/authorized_keys
+RUN chown jenkins:jenkins /home/jenkins/.ssh/authorized_keys && \
+    chmod 600 /home/jenkins/.ssh/authorized_keys
+
+# Create directory for ansible private key
+RUN mkdir -p /home/jenkins/.ssh/ansible && \
+    chown -R jenkins:jenkins /home/jenkins/.ssh/ansible && \
+    chmod 700 /home/jenkins/.ssh/ansible
+
+# Copy ansible private key for connecting to test server
+COPY secrets/ansible_to_server_ssh_key /home/jenkins/.ssh/ansible/id_rsa
+RUN chown jenkins:jenkins /home/jenkins/.ssh/ansible/id_rsa && \
+    chmod 600 /home/jenkins/.ssh/ansible/id_rsa
+
+# Configure SSH client to use the key without host key checking
+RUN echo "Host test-server" > /home/jenkins/.ssh/config && \
+    echo "  HostName test-server" >> /home/jenkins/.ssh/config && \
+    echo "  User ansible" >> /home/jenkins/.ssh/config && \
+    echo "  IdentityFile /home/jenkins/.ssh/ansible/id_rsa" >> /home/jenkins/.ssh/config && \
+    echo "  StrictHostKeyChecking no" >> /home/jenkins/.ssh/config && \
+    echo "  UserKnownHostsFile=/dev/null" >> /home/jenkins/.ssh/config && \
+    chown jenkins:jenkins /home/jenkins/.ssh/config && \
+    chmod 600 /home/jenkins/.ssh/config
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]

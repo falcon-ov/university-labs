@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:8.3-apache
+    container_name: php_apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ../app:/var/www/html  # Ссылка на app из корня проекта (адаптируй путь)
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  cron-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lab03-cron
+    depends_on:
+      - web
+    volumes:
+      - ./data:/app/data  # Для сохранения JSON
+      - ./error.log:/app/error.log  # Для error.log
+      - ./logs:/var/log  # Для cron.log (опционально)
+    env_file:
+      - .env  # Для API_KEY
+    restart: unless-stopped

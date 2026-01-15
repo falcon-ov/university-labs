@@ -1,0 +1,5 @@
+# Ежедневно в 6:00 AM: MDL to EUR за предыдущий день
+0 6 * * * python /app/currency_exchange_rate.py MDL EUR $(date -d "yesterday" +\%Y-\%m-\%d) >> /var/log/cron.log 2>&1
+
+# Еженедельно в пятницу в 17:00: MDL to USD за предыдущую неделю (цикл по 7 дням)
+0 17 * * 5 for day in $(seq 1 7); do date=$(date -d "$day days ago" +\%Y-\%m-\%d); python /app/currency_exchange_rate.py MDL USD $date >> /var/log/cron.log 2>&1; done

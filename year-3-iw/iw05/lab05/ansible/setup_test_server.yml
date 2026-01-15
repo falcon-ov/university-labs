@@ -1,0 +1,73 @@
+---
+- name: Setup Test Server for PHP Application
+  hosts: test_servers
+  become: yes
+  vars:
+    document_root: /var/www/html
+    server_name: test-server
+    
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Install PHP and extensions
+      apt:
+        name:
+          - php
+          - php-cli
+          - php-mbstring
+          - php-xml
+          - php-curl
+          - libapache2-mod-php
+        state: present
+
+    - name: Enable Apache rewrite module
+      apache2_module:
+        name: rewrite
+        state: present
+      notify: Restart Apache
+
+    - name: Create document root directory
+      file:
+        path: "{{ document_root }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Configure Apache Virtual Host
+      template:
+        src: vhost.conf.j2
+        dest: /etc/apache2/sites-available/php-project.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart Apache
+
+    - name: Disable default site
+      command: a2dissite 000-default.conf
+      notify: Restart Apache
+      ignore_errors: yes
+
+    - name: Enable PHP project site
+      command: a2ensite php-project.conf
+      notify: Restart Apache
+
+    - name: Ensure Apache is started and enabled
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
