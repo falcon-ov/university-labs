@@ -1,0 +1,22 @@
+---
+- name: Deploy Docker Compose on VM1
+  hosts: vm1  # Или docker_hosts для всех
+  become: yes
+  tasks:
+    - name: Copy docker-compose.yml to VM
+      copy:
+        src: ./docker-compose.yml
+        dest: /home/{{ ansible_user }}/docker-compose.yml
+        mode: '0644'
+
+    - name: Run docker compose up -d
+      command: docker compose -f /home/{{ ansible_user }}/docker-compose.yml up -d
+      register: compose_output
+
+    - name: Check container status
+      command: docker ps
+      register: docker_ps_output
+
+    - name: Display docker ps output
+      debug:
+        msg: "{{ docker_ps_output.stdout }}"
