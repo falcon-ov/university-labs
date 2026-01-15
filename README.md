@@ -24,7 +24,7 @@ The working directory will contain **only this lab**.
 
 ### Download all labs of one course
 
-For example, all Java labs of the second year:
+For example, all design soft labs of the third year:
 
 ```bash
 git clone --no-checkout https://github.com/falcon-ov/university-labs.git
