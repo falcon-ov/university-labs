@@ -1,0 +1,14 @@
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\bin\Debug\net8.0\MyFirstApp.exe
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\bin\Debug\net8.0\MyFirstApp.deps.json
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\bin\Debug\net8.0\MyFirstApp.runtimeconfig.json
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\bin\Debug\net8.0\MyFirstApp.dll
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\bin\Debug\net8.0\MyFirstApp.pdb
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\MyFirstApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\MyFirstApp.AssemblyInfoInputs.cache
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\MyFirstApp.AssemblyInfo.cs
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\MyFirstApp.csproj.CoreCompileInputs.cache
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\MyFirstApp.dll
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\refint\MyFirstApp.dll
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\MyFirstApp.pdb
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\MyFirstApp.genruntimeconfig.cache
+C:\Users\user\git-projects\design-soft-lab1\MyFirstApp\obj\Debug\net8.0\ref\MyFirstApp.dll
