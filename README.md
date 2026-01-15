@@ -9,7 +9,7 @@
 Подходит, если нужна **одна конкретная папка**.
 
 ```bash
-git clone --no-checkout https://github.com/USERNAME/university-labs.git
+git clone --no-checkout https://github.com/falcon-ov/university-labs.git
 cd university-labs
 
 git sparse-checkout init --cone
@@ -25,17 +25,11 @@ git sparse-checkout set year-3-design-soft/design-soft-lab1
 Например, все лабораторки по Java второго года:
 
 ```bash
-git clone --no-checkout https://github.com/USERNAME/university-labs.git
+git clone --no-checkout https://github.com/falcon-ov/university-labs.git
 cd university-labs
 
 git sparse-checkout init --cone
 git sparse-checkout set year-3-design-soft
-```
-
-(если у тебя папки называются с префиксом `year-3-design-soft-*`, можно выбрать несколько)
-
-```bash
-git sparse-checkout set year-3-ai-*
 ```
 
 * `sparse-checkout` — официальный механизм Git
