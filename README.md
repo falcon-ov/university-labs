@@ -9,7 +9,7 @@ The repository contains **all lab works**, but you **don’t have to clone every
 Suitable if you need **one specific folder**.
 
 ```bash
-git clone --no-checkout https://github.com/falcon-ov/university-labs.git
+git clone --filter=blob:none --sparse https://github.com/falcon-ov/university-labs.git
 cd university-labs
 
 git sparse-checkout init --cone
@@ -27,7 +27,7 @@ The working directory will contain **only this lab**.
 For example, all design soft labs of the third year:
 
 ```bash
-git clone --no-checkout https://github.com/falcon-ov/university-labs.git
+git clone --filter=blob:none --sparse https://github.com/falcon-ov/university-labs.git
 cd university-labs
 
 git sparse-checkout init --cone
