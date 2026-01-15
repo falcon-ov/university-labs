@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.4</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>7e4f941b11a54977b970914b5e536eeb</uuid>
+            <template>Template IT-System-Monitoring</template>
+            <name>Template IT-System-Monitoring</name>
+            <description>Шаблон для мониторинга CPU, RAM, диска и сети</description>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>04900b43cff04aafb9f2d7925a995179</uuid>
+                    <name>Network Traffic</name>
+                    <key>net.if.in[ens4]</key>
+                </item>
+                <item>
+                    <uuid>1fdc9fd35238408d8b6863508a7e96f6</uuid>
+                    <name>Network Traffic</name>
+                    <key>net.if.out[ens4]</key>
+                </item>
+                <item>
+                    <uuid>6b4d5d4e9bb14ae9a18f2e413702d117</uuid>
+                    <name>RAM to CPU Load Ratio</name>
+                    <type>CALCULATED</type>
+                    <key>ram.cpu.ratio</key>
+                    <value_type>FLOAT</value_type>
+                    <params>last(//vm.memory.util[pused]) / last(//system.cpu.load[all,avg5])</params>
+                </item>
+                <item>
+                    <uuid>fca8d44051eb40f7a8daeb027bcaa1e4</uuid>
+                    <name>CPU Load</name>
+                    <key>system.cpu.load[all,avg1]</key>
+                    <value_type>FLOAT</value_type>
+                </item>
+                <item>
+                    <uuid>9f9d40cbf24543d4b13201c05bd0916b</uuid>
+                    <name>CPU Load</name>
+                    <key>system.cpu.load[all,avg5]</key>
+                    <value_type>FLOAT</value_type>
+                </item>
+                <item>
+                    <uuid>ccdbbf2056cc437f9d723a185125ac63</uuid>
+                    <name>CPU Load</name>
+                    <key>system.cpu.load[all,avg15]</key>
+                    <value_type>FLOAT</value_type>
+                </item>
+                <item>
+                    <uuid>0316cb9028cd4f359d091848c633bc20</uuid>
+                    <name>Master Item</name>
+                    <key>system.uptime</key>
+                    <units>uptime</units>
+                </item>
+                <item>
+                    <uuid>91a0539b6fe248188728b40161e62c54</uuid>
+                    <name>System Uptime (days)</name>
+                    <type>DEPENDENT</type>
+                    <key>system.uptime.days</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                    <units>days</units>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <parameters>
+                                <parameter>1.1574E-5</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>system.uptime</key>
+                    </master_item>
+                </item>
+                <item>
+                    <uuid>8b7746adc1bb41be8cd0cc1fdfeb06ba</uuid>
+                    <name>Disk Space Used %</name>
+                    <key>vfs.fs.size[/,pused]</key>
+                    <value_type>FLOAT</value_type>
+                </item>
+                <item>
+                    <uuid>492caa1032f642b0a59cb69790b95f76</uuid>
+                    <name>RAM Used %</name>
+                    <key>vm.memory.size[pused]</key>
+                    <value_type>FLOAT</value_type>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <uuid>33eed462beb04255b1e8eeee64c67817</uuid>
+            <expression>avg(/Template IT-System-Monitoring/system.cpu.load[all,avg1],5m)&gt;2 and last(/Template IT-System-Monitoring/vm.memory.size[pused])&gt;80</expression>
+            <name>High CPU and RAM usage on instance-lab-small</name>
+            <priority>HIGH</priority>
+        </trigger>
+    </triggers>
+</zabbix_export>
