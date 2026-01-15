@@ -1,0 +1,162 @@
+/* Основные стили для всего сайта */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+/* Стили для навигации */
+nav {
+    margin: 20px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для форм */
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Стили для сообщений об ошибках */
+form p {
+    color: #e74c3c;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Стили для списков задач */
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+/* Приоритеты задач */
+.priority-low {
+    color: #27ae60;
+}
+
+.priority-medium {
+    color: #f39c12;
+}
+
+.priority-high {
+    color: #e74c3c;
+}
+
+/* Теги */
+.tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.tag {
+    background-color: #eee;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+/* Шаги */
+ol {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+ol li {
+    margin-bottom: 5px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Дата создания */
+.created-at {
+    color: #7f8c8d;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+}
+
+.remove-btn {
+    order: -1; /* Помещает кнопку слева */
+    margin-right: 5px; /* Отступ справа от кнопки */
+}
